@@ -1,0 +1,3 @@
+/home/asc2022team0/huaweisc/shs/c++/build/CMakeFiles/rebuild_cache.dir
+/home/asc2022team0/huaweisc/shs/c++/build/CMakeFiles/edit_cache.dir
+/home/asc2022team0/huaweisc/shs/c++/build/CMakeFiles/main.dir
