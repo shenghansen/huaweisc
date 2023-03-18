@@ -38,14 +38,11 @@ bool readUntilOK() {
             }
         }
         else{
-            if(!first){
-                cerr<<line[0]<<endl;
-                first=true;
-            }
-            for (size_t i = 0; i < sizeof line; i++){
-                if(line[i] == ' ' || line[i] == '.'||line[i] == '-'||line[i] == '\n'||(line[i]<58&&line[i]>47) )
-                    fout<<line[i];
-            }
+            
+            // for (size_t i = 0; i < sizeof line; i++){
+            //     if(line[i] == ' ' || line[i] == '.'||line[i] == '-'||line[i] == '\n'||(line[i]<58&&line[i]>47) )
+            //         fout<<line[i];
+            // }
         }
         if (line[0] == 'O' && line[1] == 'K') {
             fout<<"OK\n";
@@ -63,8 +60,9 @@ int main() {
     readUntilOK();
     puts("OK");
     fflush(stdout);
-    int frameID;
+    int frameID=0;
     while (scanf("%d", &frameID) != EOF) {
+        frameID++;
         readUntilOK();
         printf("%d\n", frameID);
         int lineSpeed = 3;
@@ -73,7 +71,7 @@ int main() {
             printf("forward %d %d\n", robotId, lineSpeed);
             printf("rotate %d %f\n", robotId, angleSpeed);
         }
-        printf("OK\n", frameID);
+        printf("OK\n");
         fflush(stdout);
     }
     fout.close();
