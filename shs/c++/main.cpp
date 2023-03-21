@@ -24,6 +24,82 @@ int* remaining_production_time;//剩余生产时间
 int* raw_material_status;//原材料格状态
 bool* product_status;//产品格状态
 
+enum command_type{
+    FORWARD,
+    ROTATE,
+    BUY,
+    SELL,
+    DESTORY
+};
+
+class order{
+private:
+    command_type type;
+    int robot_id;
+    double value=-1000;
+public:
+    order(command_type type,int robot_id,double value):type(type),robot_id(robot_id),value(value){}
+    order(command_type type,int robot_id):type(type),robot_id(robot_id){}
+    void printf_order(){
+        switch(type){
+            case FORWARD:
+                printf("forward");
+                break;
+            case ROTATE:
+                printf("rotate");
+                break;
+            case BUY:
+                printf("buy");
+                break;  
+            case SELL:
+                printf("sell");
+                break;
+            case DESTORY:
+                printf("destory");
+                break;
+        }
+        if(value!=-1000)
+            printf(" %d %f\n",robot_id,value);
+        else
+            printf(" %d\n",robot_id);
+    }
+};
+
+class order_list{
+private:
+    queue<order> order_list;
+    int next_order=INT32_MAX;
+public:
+    void add_order(order order){
+        order_list.push(order);
+    }
+    void printf_order(){
+        if(next_order>0){
+            next_order--;
+        }
+        else if(next_order==0 && !order_list.empty()){
+            order_list.front().printf_order();
+            order_list.pop();
+        }
+    }    
+};
+
+//计算要转向的角度
+float get_angle(float x1,float y1,float x2,float y2,float orientation){
+    float beta_rad = atan2(y2 - y1, x2 - x1);
+    if (beta_rad < 0)
+        beta_rad += 2 * M_PI;
+    // 计算A点朝向与B点连线的夹角
+    double angle_rad = atan2(sin(beta_rad - orientation), cos(beta_rad - orientation));
+    return angle_rad;
+}
+
+//计算两点间距离
+float get_distance(float x1,float y1,float x2,float y2){
+    return sqrt((x1-x2)*(x1-x2)+(y1-y2)*(y1-y2));
+}
+
+
 
 
 bool readUntilOK() {
