@@ -9,6 +9,14 @@
 /home/asc2022team0/huaweisc/shs/c++/main.cpp
 iostream
 -
+string
+-
+sstream
+-
 fstream
+-
+queue
+-
+math.h
 -
 
